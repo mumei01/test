@@ -1,0 +1,12 @@
+name: Battleroyale
+version: '${project.version}'
+main: mumei.battleroyale.Battleroyale
+api-version: 1.18
+commands:
+  battle:
+    description: バトロワ
+permissions:
+  Battleoryale.command.start:
+    default: op
+  Battleoryale.command.stop:
+    default: op

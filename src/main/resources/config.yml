@@ -1,0 +1,97 @@
+#ロビー関係
+lobby:
+  #ゲームが終了したらテレポートするか
+  endgame_tp_lobby: true
+  #ロビーのスポーン場所の設定
+  spawn_loc:
+    world: lobby
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    yaw: 0
+    pitch: 0
+
+#ゲーム関係
+game:
+  #スタートする位置
+  start_loc:
+    world: map1
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    yaw: 0
+    pitch: 0
+
+  #ゲーム中に死んだらスペクテイターにするか
+  dead_spec:
+    #有効にするか
+    enable: true
+    #死亡後にテレポートされる位置
+    dead_loc:
+      world: map1
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      yaw: 0
+      pitch: 0
+  #ゲーム開始後にエリトラが削除されるまでの秒数
+  remove_elytra_seconds: 20
+  #ボーダー関係
+  world_border:
+    #デフォルトのサイズ
+    defalut: 500
+    #ゲーム開始から第一ボーダーが収縮され始めるまでの秒数
+    border_start_seconds: 20
+
+    #第一収縮
+    first-border:
+      #ボーダーのセンター位置
+      first-border-loc:
+        world: map1
+        x: 0.0
+        y: 0.0
+        z: 0.0
+        yaw: 0
+        pitch: 0
+      #収縮にかかる時間
+      seconds: 60
+      #第一収縮のボーダーサイズ(デフォルトのサイズより小さくすること)
+      first-size: 250
+      #収縮後第二収縮が始まるまで待機する時間
+      wait-seconds: 30
+
+    #第二収縮
+    second-border:
+      #ボーダーのセンター位置
+      second-border-loc:
+        world: map1
+        x: 0.0
+        y: 0.0
+        z: 0.0
+        yaw: 0
+        pitch: 0
+      #収縮にかかる時間
+      seconds: 60
+      #第二収縮のボーダーサイズ(第一収縮のサイズより小さくすること)
+      second-size: 100
+      #収縮後第三収縮が始まるまで待機する時間
+      wait-seconds: 30
+
+
+    #第三収縮
+    third-border:
+      #ボーダーのセンター位置
+      dhird-border-loc:
+        world: map1
+        x: 0.0
+        y: 0.0
+        z: 0.0
+        yaw: 0
+        pitch: 0
+      #収縮にかかる時間
+      seconds: 60
+      #第三収縮のボーダーサイズ(第二収縮のサイズより小さくすること)
+      second-size: 30
+
+
+
