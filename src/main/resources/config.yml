@@ -44,9 +44,9 @@ game:
     border_start_seconds: 20
 
     #第一収縮
-    first-border:
+    first_border:
       #ボーダーのセンター位置
-      first-border-loc:
+      first_border_loc:
         world: map1
         x: 0.0
         y: 0.0
@@ -56,14 +56,14 @@ game:
       #収縮にかかる時間
       seconds: 60
       #第一収縮のボーダーサイズ(デフォルトのサイズより小さくすること)
-      first-size: 250
+      first_size: 250
       #収縮後第二収縮が始まるまで待機する時間
-      wait-seconds: 30
+      wait_seconds: 30
 
     #第二収縮
-    second-border:
+    second_border:
       #ボーダーのセンター位置
-      second-border-loc:
+      second_border_loc:
         world: map1
         x: 0.0
         y: 0.0
@@ -73,15 +73,15 @@ game:
       #収縮にかかる時間
       seconds: 60
       #第二収縮のボーダーサイズ(第一収縮のサイズより小さくすること)
-      second-size: 100
+      second_size: 100
       #収縮後第三収縮が始まるまで待機する時間
-      wait-seconds: 30
+      wait_seconds: 30
 
 
     #第三収縮
-    third-border:
+    third_border:
       #ボーダーのセンター位置
-      dhird-border-loc:
+      dhird_border_loc:
         world: map1
         x: 0.0
         y: 0.0
@@ -91,7 +91,7 @@ game:
       #収縮にかかる時間
       seconds: 60
       #第三収縮のボーダーサイズ(第二収縮のサイズより小さくすること)
-      second-size: 30
+      second_size: 30
 
 
 

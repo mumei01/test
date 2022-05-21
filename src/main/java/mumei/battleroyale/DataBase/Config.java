@@ -60,6 +60,29 @@ public class Config {
     public int get_world_border_start_seconds(){return config.getInt("game.world_border.border_start_seconds");}
     //configの first-border関係　以下コメント略します
 
-    public
+    //TODO 以下 border値によって返す値を変更できるように
+    //borderは first second third のどれかがはいってます
+    public Location get_border_loc(String border){
+        // border = firest or second or third
+        return new Location(
+                Bukkit.getWorld(config.getString("game.world_border.first_border.first_border_loc.world"))
+                , config.getDouble("game.world_border.first_border.first_border_loc.x")
+                , config.getDouble("game.world_border.first_border.first_border_loc.y")
+                , config.getDouble("game.world_border.first_border.first_border_loc.z")
+                , config.getInt("game.world_border.first_border.first_border_loc.yaw")
+                , config.getInt("game.world_border.first_border.first_border_loc.pitch")
+        );
+    }
+    public int get_border_seconds(String border){
+        return config.getInt("game.world_border.first_border.seconds");
+    }
+    public int get_border_second_size(String border){
+        return config.getInt("game.world_border.first_border.second_size");
+    }
+    public int get_border_wait_seconds(String border){
+        // border = first or secondのみ thirdはない
+        return config.getInt("game.world_border.first_border.wait_seconds");
+    }
+
 
 }

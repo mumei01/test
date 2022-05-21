@@ -1,6 +1,9 @@
 package mumei.battleroyale;
 
 import mumei.battleroyale.Commands.CommandManager;
+import mumei.battleroyale.Commands.TabCompleteListener;
+import mumei.battleroyale.Listeners.PlayerDeadListener;
+import mumei.battleroyale.Listeners.PlayerJoinListener;
 import mumei.battleroyale.Utils.GameStatus;
 import org.bukkit.plugin.java.JavaPlugin;
 import sun.security.krb5.Config;
@@ -17,10 +20,11 @@ public final class Battleroyale extends JavaPlugin {
         // Plugin startup logic
         instance = this;
         saveDefaultConfig();
-        config = new Config(getConfig());
-        gameStatus = new GameStatus(false);
+        config = new Config(getConfig(););
 
-        startCounting(this);
+        gameStatus.setgame(false);
+
+        //startCounting(this);
 
         registerListener(this);
 
@@ -36,12 +40,14 @@ public final class Battleroyale extends JavaPlugin {
         getLogger().info("プラグインが無効になりました。");
     }
     //インスタンスを返す
-    public static JavaPlugin getInstance(){return instance}
-
+    public static JavaPlugin getInstance(){return instance;}
+    public void getConfig(){
+        return config;
+    }
     //イベントリスナーの登録
     private void registerListener(JavaPlugin plugin){
         plugin.getServer().getPluginManager().registerEvents(new PlayerJoinListener(),plugin);
-        plugin.getServer().getPluginManager().registerEvents(new PlayerDeadListenar(),plugin);
+        plugin.getServer().getPluginManager().registerEvents(new PlayerDeadListener(),plugin);
     }
 
 }
