@@ -24,7 +24,7 @@ public final class Battleroyale extends JavaPlugin {
         instance = this;
         saveDefaultConfig();
 
-        config = new Config((Plugin) instance.getConfig());
+        config = new Config(this);
 
         gameStatus.setgame(false);
 
