@@ -1,17 +1,19 @@
 package mumei.battleroyale.DataBase;
 
+import mumei.battleroyale.Battleroyale;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
-public class Config {
-    private FileConfiguration config;
+public class Config{
+    private FileConfiguration config = null;
 
     //initialize
-    public Config(FileConfiguration config){
-        this.config = config;
+    public Config(Plugin plugin){
+        config = plugin.getConfig();
     }
-
     //configの endgame_tp_lobbyを返します
     public boolean get_endgame_tp_lobby(){return config.getBoolean("lobby.endgame_tp_lobby");}
 
@@ -65,23 +67,34 @@ public class Config {
     public Location get_border_loc(String border){
         // border = firest or second or third
         return new Location(
-                Bukkit.getWorld(config.getString("game.world_border.first_border.first_border_loc.world"))
-                , config.getDouble("game.world_border.first_border.first_border_loc.x")
-                , config.getDouble("game.world_border.first_border.first_border_loc.y")
-                , config.getDouble("game.world_border.first_border.first_border_loc.z")
-                , config.getInt("game.world_border.first_border.first_border_loc.yaw")
-                , config.getInt("game.world_border.first_border.first_border_loc.pitch")
+                Bukkit.getWorld(config.getString("game.world_border.first_border."+border+"_border_loc.world"))
+                , config.getDouble("game.world_border."+border+"_border."+border+"_border_loc.x")
+                , config.getDouble("game.world_border."+border+"_border."+border+"_border_loc.y")
+                , config.getDouble("game.world_border."+border+"_border."+border+"_border_loc.z")
+                , config.getInt("game.world_border."+border+"_border."+border+"_border_loc.yaw")
+                , config.getInt("game.world_border."+border+"_border."+border+"_border_loc.pitch")
         );
     }
     public int get_border_seconds(String border){
-        return config.getInt("game.world_border.first_border.seconds");
+        return config.getInt("game.world_border."+border+"_border.seconds");
     }
     public int get_border_second_size(String border){
-        return config.getInt("game.world_border.first_border.second_size");
+        return config.getInt("game.world_border."+border+"_border.second_size");
     }
     public int get_border_wait_seconds(String border){
         // border = first or secondのみ thirdはない
-        return config.getInt("game.world_border.first_border.wait_seconds");
+        return config.getInt("game.world_border."+border+"_border.wait_seconds");
+    }
+
+    public int get_GAME_TIME(){
+        return this.get_remove_elytra_seconds()
+                + this.get_world_border_start_seconds()
+                + this.get_border_seconds("first")
+                + this.get_border_wait_seconds("first")
+                + this.get_border_seconds("second")
+                + this.get_border_wait_seconds("second")
+                + this.get_border_seconds("third");
+
     }
 
 

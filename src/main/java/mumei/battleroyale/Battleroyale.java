@@ -2,17 +2,20 @@ package mumei.battleroyale;
 
 import mumei.battleroyale.Commands.CommandManager;
 import mumei.battleroyale.Commands.TabCompleteListener;
+import mumei.battleroyale.DataBase.Config;
 import mumei.battleroyale.Listeners.PlayerDeadListener;
 import mumei.battleroyale.Listeners.PlayerJoinListener;
+import mumei.battleroyale.Utils.GameManager;
 import mumei.battleroyale.Utils.GameStatus;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import sun.security.krb5.Config;
 
 
 public final class Battleroyale extends JavaPlugin {
     public static Config config;
     public static GameStatus gameStatus;
-    private static JavaPlugin instance;
+    public static JavaPlugin instance;
 
 
     @Override
@@ -20,11 +23,12 @@ public final class Battleroyale extends JavaPlugin {
         // Plugin startup logic
         instance = this;
         saveDefaultConfig();
-        config = new Config(getConfig(););
+
+        config = new Config((Plugin) instance.getConfig());
 
         gameStatus.setgame(false);
 
-        //startCounting(this);
+        GameManager.check(this);
 
         registerListener(this);
 
@@ -41,9 +45,8 @@ public final class Battleroyale extends JavaPlugin {
     }
     //インスタンスを返す
     public static JavaPlugin getInstance(){return instance;}
-    public void getConfig(){
-        return config;
-    }
+
+
     //イベントリスナーの登録
     private void registerListener(JavaPlugin plugin){
         plugin.getServer().getPluginManager().registerEvents(new PlayerJoinListener(),plugin);

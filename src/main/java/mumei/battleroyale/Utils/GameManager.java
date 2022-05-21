@@ -5,11 +5,14 @@ import mumei.battleroyale.DataBase.Config;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 
 public class GameManager {
     public static GameStatus gamestatus;
+    public static Config config = Battleroyale.config;
     public static void start(){
         //ゲーム中なら返す
         if (gamestatus.getgame()){return;}
@@ -80,6 +83,48 @@ public class GameManager {
             player.playSound(player.getLocation(),Sound.ENTITY_ENDER_DRAGON_DEATH,10,2);
 
         }
+
+    }
+    public static void check(JavaPlugin plugin){
+        new BukkitRunnable(){
+            @Override
+            public void run(){
+                //常時ゲーム中じゃなければぱす
+                if (!GameStatus.getgame()){return;}
+
+                //生き残りのプレイヤーを取得
+                ArrayList<Player> players = new ArrayList<>();
+                for (Player player : Bukkit.getOnlinePlayers()){
+                    if (player.getGameMode().equals(GameMode.SURVIVAL)){
+                        players.add(player);
+                    }
+                }
+
+                //アクションバーに以下の情報を表示
+                for(Player player : Bukkit.getOnlinePlayers()) {
+                    player.sendActionBar(ChatColor.YELLOW + "§l残り人数" + ChatColor.WHITE + ": " + ChatColor.YELLOW + "§l" + players.size() + ChatColor.GREEN + "§l 残り時間" + ChatColor.WHITE + ": " + ChatColor.GREEN + "§l" + GameStatus.getTime());
+                }
+
+                //生き残りが一人なら終わり
+                if(players.size() <= 1 || GameStatus.getTime() == 0) {
+                    stop();
+                }
+
+                //残り時間を減らしていく
+                GameStatus.setTime(GameStatus.getTime() - 1);
+
+                if(Battleroyale.config.get_GAME_TIME() - Battleroyale.config.get_remove_elytra_seconds() == Battleroyale.gameStatus.getTime()) {
+                    for(Player player : Bukkit.getOnlinePlayers()) {
+                        if(player.getInventory().getChestplate().getType().equals(Material.ELYTRA)) {
+                            player.getInventory().getChestplate().setAmount(0);
+                        }
+                    }
+                }
+
+
+
+            }
+        }.runTaskTimer(plugin,20,20);
 
     }
 
